@@ -43,3 +43,21 @@ The application will be available at http://0.0.0.0:5000
 ```bash
 pytest tests/
 ```
+
+## Demo
+
+Here's what the DevOps Monitoring Dashboard can do:
+
+### Real-time Metrics
+- Monitor CPU usage, memory consumption, and disk utilization in real-time
+- Interactive charts updating every 5 seconds
+- System information display including hostname, platform, and container status
+
+### Alert System
+- Automated alerts when resource usage exceeds thresholds:
+  - CPU usage > 90%
+  - Memory usage > 85%
+- View all alerts in a dedicated alerts page
+
+### Screenshots
+![Dashboard](https://raw.githubusercontent.com/username/devops-monitoring-dashboard/main/demo/dashboard.png)
