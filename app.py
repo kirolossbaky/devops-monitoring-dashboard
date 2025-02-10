@@ -1,8 +1,9 @@
 import os
 import logging
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase
+import psutil
 
 # Configure logging
 logging.basicConfig(level=logging.DEBUG)
@@ -31,6 +32,19 @@ def dashboard():
 @app.route('/alerts')
 def alerts():
     return render_template('alerts.html')
+
+@app.route('/api/metrics')
+def get_metrics():
+    try:
+        metrics = {
+            'cpu': psutil.cpu_percent(),
+            'memory': psutil.virtual_memory().percent,
+            'disk': psutil.disk_usage('/').percent
+        }
+        return jsonify(metrics)
+    except Exception as e:
+        logger.error(f"Error collecting metrics: {str(e)}")
+        return jsonify({'error': str(e)}), 500
 
 with app.app_context():
     import models
