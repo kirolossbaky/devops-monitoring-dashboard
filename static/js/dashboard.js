@@ -35,6 +35,27 @@ function initChart() {
     });
 }
 
+function updateSystemInfo() {
+    fetch('/api/system-info')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('hostname').textContent = data.hostname;
+            document.getElementById('platform').textContent = data.platform;
+            document.getElementById('pythonVersion').textContent = data.python_version;
+            document.getElementById('cpuCount').textContent = data.cpu_count;
+            document.getElementById('totalMemory').textContent = data.total_memory.toFixed(2);
+
+            const containerStatus = document.getElementById('containerStatus');
+            if (data.container) {
+                containerStatus.textContent = 'Running in Container';
+                containerStatus.className = 'badge bg-success';
+            } else {
+                containerStatus.textContent = 'Native Environment';
+                containerStatus.className = 'badge bg-info';
+            }
+        });
+}
+
 function updateMetrics() {
     fetch('/api/metrics')
         .then(response => response.json())
@@ -63,6 +84,8 @@ function updateMetrics() {
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     initChart();
+    updateSystemInfo(); // Get initial system info
     updateMetrics();
     setInterval(updateMetrics, 5000);
+    setInterval(updateSystemInfo, 60000); // Update system info every minute
 });

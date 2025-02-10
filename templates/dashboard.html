@@ -41,5 +41,29 @@
     </div>
 </div>
 
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">System Information</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Hostname:</strong> <span id="hostname">--</span></p>
+                        <p><strong>Platform:</strong> <span id="platform">--</span></p>
+                        <p><strong>Python Version:</strong> <span id="pythonVersion">--</span></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>CPU Cores:</strong> <span id="cpuCount">--</span></p>
+                        <p><strong>Total Memory:</strong> <span id="totalMemory">--</span> GB</p>
+                        <p><strong>Container Status:</strong> <span id="containerStatus" class="badge bg-secondary">--</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 {% endblock %}
